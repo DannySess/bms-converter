@@ -206,7 +206,7 @@ HTML = """
       const r = await fetch('/api/settings');
       const d = await r.json();
       document.getElementById('owui-url').value = d.open_webui_url || '';
-      document.getElementById('owui-token').value = d.open_webui_token ? '••••••••' : '';
+      document.getElementById('owui-token').value = d.open_webui_token || '';
       renderMappings(d.mappings || {}, d.unmapped || []);
     }
 
@@ -244,7 +244,7 @@ HTML = """
     async function saveConnection() {
       const url = document.getElementById('owui-url').value;
       const token = document.getElementById('owui-token').value;
-      if (token === '••••••••') {
+      if (!token || token === '••••••••') {
         // Don't overwrite token if it wasn't changed
         const r = await fetch('/api/settings/connection', {
           method: 'POST', headers: {'Content-Type': 'application/json'},
@@ -361,7 +361,7 @@ def api_settings():
     unmapped = [f for f in folders if f not in mapped]
     return jsonify({
         "open_webui_url": cfg.get("open_webui_url", ""),
-        "open_webui_token": "set" if cfg.get("open_webui_token") else "",
+        "open_webui_token": cfg.get("open_webui_token", ""),
         "mappings": cfg.get("mappings", {}),
         "unmapped": unmapped
     })
