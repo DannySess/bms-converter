@@ -24,7 +24,7 @@ UI_PORT     = int(os.environ.get("UI_PORT", 5000))
 
 CODE_EXTS = {".py", ".js", ".aut", ".tgml", ".xml"}
 SKIP_EXTS = {".xbk", ".bak", ".tmp", ".log", ".dat", ".db", ".sqlite", ".idx", ".bin"}
-SKIP_DIRS = {"OLD", "old", "archive", "8_BACKUPS", "Temp", "temp"}
+SKIP_DIRS = {"OLD", "old", "Old", "archive", "8_BACKUPS", "Temp", "temp", "V1", "V2", "V3", "V4", "V5", "Update", "WEBPAGES"}
 
 # ── State ─────────────────────────────────────────────────────────────────────
 state = {"paused": False, "converted": 0, "skipped": 0, "failed": 0, "current": None, "logs": []}
